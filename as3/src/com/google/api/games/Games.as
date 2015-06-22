@@ -71,6 +71,22 @@ package com.google.api.games
 		{
 			return context.call("getPlayerID", null) as String;
 		}
+
+		public static function getDisplayName():String
+		{
+			return context.call("getDisplayName", null) as String;
+		}
+
+		public static function getHiResImageUri():String
+		{
+			return context.call("getHiResImageUri", null) as String;
+		}
+		
+		public static function getIconImageUri():String
+		{
+			return context.call("getIconImageUri", null) as String;
+		}
+		
 		
 		public static function signOut():void
 		{

@@ -53,6 +53,9 @@ public class Context extends FREContext implements
 		map.put("start",
 				new start());
 		map.put("getPlayerID", new getPlayerID());
+		map.put("getDisplayName", new getDisplayName());
+		map.put("getHiResImageUri", new getHiResImageUri());
+		map.put("getIconImageUri", new getIconImageUri());
 
 		return map;
 	}
@@ -95,6 +98,58 @@ public class Context extends FREContext implements
 			}
 			
 			return bool;
+		}
+
+	}
+	public static class getDisplayName implements FREFunction {
+
+		@Override
+		public FREObject call(FREContext context, FREObject[] args) {
+			FREObject res = null;
+			try {
+				 Player player = Games.Players.getCurrentPlayer(SignInActivity.mHelper.getApiClient());
+				 res = FREObject.newObject(player.getDisplayName());
+			} catch (FREWrongThreadException e) {
+				e.printStackTrace();
+			}
+			
+			return res;
+		}
+
+	}
+	public static class getHiResImageUri implements FREFunction {
+
+		@Override
+		public FREObject call(FREContext context, FREObject[] args) {
+			FREObject res = null;
+			try {
+				 Player player = Games.Players.getCurrentPlayer(SignInActivity.mHelper.getApiClient());
+				 if (player.hasHiResImage()) {
+				 	res = FREObject.newObject(player.getHiResImageUri().getSchemeSpecificPart());
+				 }
+			} catch (FREWrongThreadException e) {
+				e.printStackTrace();
+			}
+			
+			return res;
+		}
+
+	}
+	public static class getIconImageUri implements FREFunction {
+
+		@Override
+		public FREObject call(FREContext context, FREObject[] args) {
+			FREObject res = null;
+			try {
+				 Player player = Games.Players.getCurrentPlayer(SignInActivity.mHelper.getApiClient());
+				 if (player.hasIconImage()) {
+				 	res = FREObject.newObject(player.getIconImageUri().getSchemeSpecificPart());
+				 }
+			} catch (FREWrongThreadException e) {
+				e.printStackTrace();
+			}
+			
+			return res;
 		}
 
 	}
