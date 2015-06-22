@@ -28,6 +28,7 @@ public class Achievements {
 
 		@Override
 		public FREObject call(FREContext context, FREObject[] args) {
+
 			try {
 				Games.Achievements.reveal(
 						SignInActivity.mHelper.getApiClient(),

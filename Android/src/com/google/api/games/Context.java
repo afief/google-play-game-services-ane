@@ -13,6 +13,9 @@ import com.adobe.fre.FREObject;
 import com.adobe.fre.FRETypeMismatchException;
 import com.adobe.fre.FREWrongThreadException;
 import com.google.example.games.basegameutils.GameHelper;
+import com.google.android.gms.games.Games;
+import com.google.android.gms.games.Player;
+import com.google.android.gms.games.Players;
 
 public class Context extends FREContext implements
 		GameHelper.GameHelperListener {
@@ -49,6 +52,7 @@ public class Context extends FREContext implements
 				new isSignedIn());
 		map.put("start",
 				new start());
+		map.put("getPlayerID", new getPlayerID());
 
 		return map;
 	}
@@ -70,6 +74,22 @@ public class Context extends FREContext implements
 			FREObject bool = null;
 			try {
 				 bool = FREObject.newObject(SignInActivity.mHelper.isSignedIn()) ;
+			} catch (FREWrongThreadException e) {
+				e.printStackTrace();
+			}
+			
+			return bool;
+		}
+
+	}
+	public static class getPlayerID implements FREFunction {
+
+		@Override
+		public FREObject call(FREContext context, FREObject[] args) {
+			FREObject bool = null;
+			try {
+				 Player player = Games.Players.getCurrentPlayer(SignInActivity.mHelper.getApiClient());
+				 bool = FREObject.newObject(player.getPlayerId());
 			} catch (FREWrongThreadException e) {
 				e.printStackTrace();
 			}

@@ -66,6 +66,11 @@ package com.google.api.games
 		{
 			return context.call("isSignedIn", null) as Boolean;
 		}
+
+		public static function getPlayerID():String
+		{
+			return context.call("getPlayerID", null) as String;
+		}
 		
 		public static function signOut():void
 		{
